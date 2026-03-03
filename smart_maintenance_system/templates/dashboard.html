@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Predictive Maintenance Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .navbar {
+            background-color: #1e3c72;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-weight: 500;
+            color: #1e3c72;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .charts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .chart-box {
+            background: white;
+            flex: 1;
+            min-width: 350px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        @media(max-width: 768px){
+            .cards, .charts {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    Smart Predictive Maintenance Dashboard 🚀
+    <a href="/">Home</a>
+    <a href="/add_machine">Add Machine</a>
+    <a href="/view_machines">Machines</a>
+</div>
+
+<div class="container">
+
+    <!-- Stats Cards -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Machines</h3>
+            <h2>{{ total_machines }}</h2>
+        </div>
+        <div class="card">
+            <h3>Total Logs</h3>
+            <h2>{{ total_logs }}</h2>
+        </div>
+        <div class="card">
+            <h3>High Risk Logs</h3>
+            <h2>{{ high_count }}</h2>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts">
+        <div class="chart-box">
+            <h3>Temperature Trend</h3>
+            <canvas id="tempChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h3>Risk Distribution</h3>
+            <canvas id="riskChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2026 Smart Maintenance | Built by Manideepika
+</div>
+
+<script>
+    // Temperature Line Chart
+    const tempCtx = document.getElementById('tempChart').getContext('2d');
+    const tempChart = new Chart(tempCtx, {
+        type: 'line',
+        data: {
+            labels: {{ temp_labels | safe }},
+            datasets: [{
+                label: 'Temperature',
+                data: {{ temp_values | safe }},
+                borderColor: '#2a5298',
+                backgroundColor: 'rgba(42,82,152,0.2)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+
+    // Risk Pie Chart
+    const riskCtx = document.getElementById('riskChart').getContext('2d');
+    const riskChart = new Chart(riskCtx, {
+        type: 'pie',
+        data: {
+            labels: ['NORMAL', 'MEDIUM RISK', 'HIGH RISK'],
+            datasets: [{
+                data: {{ risk_counts | safe }},
+                backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+</body>
+</html>

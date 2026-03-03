@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Machine</title>
+</head>
+
+<body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#f4f6f9; display:flex; justify-content:center; align-items:center; height:100vh;">
+
+    <div style="background:white; padding:40px; width:400px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.1);">
+
+        <h2 style="text-align:center; color:darkred; margin-bottom:30px;">
+            Add New Machine
+        </h2>
+
+        <form method="POST" style="display:flex; flex-direction:column;">
+
+            <label style="font-weight:bold; margin-bottom:5px;">Machine Name:</label>
+            <input type="text" name="machine_name" required 
+                   style="padding:10px; margin-bottom:20px; border:1px solid #ccc; border-radius:5px; font-size:14px;">
+
+            <label style="font-weight:bold; margin-bottom:5px;">Location:</label>
+            <input type="text" name="location" required 
+                   style="padding:10px; margin-bottom:25px; border:1px solid #ccc; border-radius:5px; font-size:14px;">
+
+            <button type="submit"
+                style="padding:10px; background-color:darkred; color:white; border:none; border-radius:5px; font-size:14px; cursor:pointer; transition:0.3s;"
+                onmouseover="this.style.backgroundColor='#a30000'"
+                onmouseout="this.style.backgroundColor='darkred'">
+                Add Machine
+            </button>
+
+            <a href="/" style="text-decoration:none; margin-top:15px;">
+                <button type="button"
+                    style="width:100%; padding:10px; background-color:#555; color:white; border:none; border-radius:5px; font-size:14px; cursor:pointer; transition:0.3s;"
+                    onmouseover="this.style.backgroundColor='#333'"
+                    onmouseout="this.style.backgroundColor='#555'">
+                    Back to Home
+                </button>
+            </a>
+
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Machines</title>
+</head>
+
+<body style="margin:0; padding:30px; font-family: Arial, sans-serif; background: linear-gradient(135deg,#0f2027,#203a43,#2c5364); min-height:100vh;">
+
+    <div style="max-width:1000px; margin:0 auto; background:white; padding:30px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.25);">
+
+        <h2 style="text-align:center; margin-bottom:30px; color:#203a43;">
+            Registered Machines
+        </h2>
+
+        <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:14px; text-align:center;">
+
+                <tr style="background-color:#203a43; color:white;">
+                    <th style="padding:12px;">ID</th>
+                    <th style="padding:12px;">Name</th>
+                    <th style="padding:12px;">Location</th>
+                    <th style="padding:12px;">Actions</th>
+                </tr>
+
+                {% for machine in machines %}
+                <tr style="border-bottom:1px solid #ddd;"
+                    onmouseover="this.style.backgroundColor='#f1f7ff'"
+                    onmouseout="this.style.backgroundColor='white'">
+
+                    <td style="padding:10px;">{{ machine.machine_id }}</td>
+                    <td style="padding:10px;">{{ machine.machine_name }}</td>
+                    <td style="padding:10px;">{{ machine.location }}</td>
+
+                    <td style="padding:10px;">
+                        <a href="/add_sensor/{{ machine.machine_id }}" style="text-decoration:none;">
+                            <button style="padding:6px 12px; margin:2px; background-color:#28a745; color:white; border:none; border-radius:5px; cursor:pointer;"
+                                onmouseover="this.style.backgroundColor='#218838'"
+                                onmouseout="this.style.backgroundColor='#28a745'">
+                                Add Sensor
+                            </button>
+                        </a>
+
+                        <a href="/view_logs/{{ machine.machine_id }}" style="text-decoration:none;">
+                            <button style="padding:6px 12px; margin:2px; background-color:#007bff; color:white; border:none; border-radius:5px; cursor:pointer;"
+                                onmouseover="this.style.backgroundColor='#0069d9'"
+                                onmouseout="this.style.backgroundColor='#007bff'">
+                                View Logs
+                            </button>
+                        </a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+
+        <div style="text-align:center; margin-top:25px;">
+            <a href="/" style="text-decoration:none;">
+                <button style="padding:10px 20px; background-color:#203a43; color:white; border:none; border-radius:6px; cursor:pointer;"
+                        onmouseover="this.style.backgroundColor='#162a33'"
+                        onmouseout="this.style.backgroundColor='#203a43'">
+                    Back to Home
+                </button>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
